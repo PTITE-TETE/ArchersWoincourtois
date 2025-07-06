@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Formulaire de Tir</title>
+
+  <!-- Bootstrap CSS via CDN (sans integrity) -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Ton fichier CSS personnalisé -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container py-5">
+
+    <!-- Logo centré -->
+    <div class="text-center mb-4">
+      <img src="./logo.jpg" alt="Logo" style="max-width: 200px; height: auto;" />
+    </div>
+
+    <form
+      class="col-8 offset-2"
+      action="https://docs.google.com/forms/d/e/1FAIpQLScornJXVh-PUmaKRkZICd40Y-JWJ7LdEn0f55hDcpg_If30IQ/formResponse"
+      method="POST"
+    >
+     <!-- Champ date (samedi prochain) -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="dateTir" class="form-label">Séance du :</label>
+          <input
+            type="date"
+            class="form-control"
+            id="dateTir"
+            name="entry.777777777"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- Nom et prénom -->
+      <div class="row mb-3">
+        <div class="col-md-5">
+          <label for="nom" class="form-label">Nom :</label>
+          <input type="text" class="form-control" id="nom" name="entry.104752214" required />
+        </div>
+        <div class="col-md-5 offset-md-1">
+          <label for="prenom" class="form-label">Prénom :</label>
+          <input type="text" class="form-control" id="prenom" name="entry.524154573" required />
+        </div>
+      </div>
+
+      <!-- Présence et distance -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label class="form-label d-block">Présence :</label>
+
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="entry.999999999"
+              id="presentOui"
+              value="Présent"
+              required
+            />
+            <label class="form-check-label" for="presentOui">Oui</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="entry.999999999"
+              id="presentNon"
+              value="Non présent"
+            />
+            <label class="form-check-label" for="presentNon">Non</label>
+          </div>
+        </div>
+
+        <div class="col-md-5 offset-md-1">
+          <label for="distance" class="form-label">Distance de tir :</label>
+          <select class="form-select" id="distance" name="entry.888888888" required>
+            <option value="" disabled selected>Choisir une distance</option>
+            <option value="15">15 mètres</option>
+            <option value="18">18 mètres</option>
+            <option value="20">20 mètres</option>
+            <option value="25">25 mètres</option>
+            <option value="30">30 mètres</option>
+            <option value="40">40 mètres</option>
+          </select>
+        </div>
+      </div>
+
+ 
+
+      <!-- Bouton envoyer -->
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Bootstrap JS (sans integrity) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  ></script>
+
+  <!-- Script pour date du samedi prochain -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const dateInput = document.getElementById('dateTir');
+      const today = new Date();
+
+      // Jour de la semaine (0 = dimanche, 6 = samedi)
+      const dayOfWeek = today.getDay();
+
+      // Calcul du nombre de jours jusqu'au samedi prochain
+      // Si aujourd'hui samedi (6), on choisit le samedi suivant (7 jours)
+      const daysUntilSaturday = (6 - dayOfWeek + 7) % 7 || 7;
+
+      const nextSaturday = new Date(today);
+      nextSaturday.setDate(today.getDate() + daysUntilSaturday);
+
+      // Formater en yyyy-mm-dd pour input[type=date]
+      const yyyy = nextSaturday.getFullYear();
+      const mm = String(nextSaturday.getMonth() + 1).padStart(2, '0');
+      const dd = String(nextSaturday.getDate()).padStart(2, '0');
+      const formattedDate = `${yyyy}-${mm}-${dd}`;
+
+      dateInput.value = formattedDate;
+    });
+  </script>
+</body>
+</html>
